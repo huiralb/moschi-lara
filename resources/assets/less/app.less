@@ -1,0 +1,165 @@
+@import "bootstrap/bootstrap";
+@import "bootstrap/mixins";
+
+@btn-font-weight: 400;
+@font-family-sans-serif: "Roboto", Helvetica, Arial, sans-serif;
+body{
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
+	font-size: 12px;
+	color: #666;
+	line-height: 20px;
+
+	// set padding-top if the header fixed top
+	padding-top: 70px;
+}
+#top{
+	@search-height: 45px;
+	box-shadow: 0 0 5px 0 #dfdfdf;
+	font-size: 14px;
+
+	// Search
+	.navbar-input-group {
+		position: relative;
+	  font-size: 0px; /*removes whitespace between button and input*/
+
+		input {
+		  border-top-right-radius: 0px;
+		  border-bottom-right-radius: 0px;
+		  width: 400px;
+		}
+
+		select.category{
+			border-radius: 0;
+			border-left: 0;
+			width: 170px;
+			overflow: hidden;
+		}
+
+		.lup {
+		  border-top-left-radius: 0px;
+		  border-bottom-left-radius: 0px;
+		  border-left: 0px;
+		  background: #EBEBEB;
+		}
+
+		.dropdown-menu{
+			right: 8px;
+			left: auto;
+			max-height: 247px;
+			overflow-y: scroll;
+		}
+	} // End Search
+
+}
+
+.categories{
+	.dropmenu{
+	}
+	.list-group-item{
+		position: relative;
+
+		& > .dropdown{
+			position: absolute;
+			left: 100%;
+			top: 0;
+			z-index: 1;
+			width: 300px;
+			visibility: hidden;
+			background-color: #fff;
+		}
+
+		&:hover > .dropdown{
+			visibility: visible;
+		}
+	}
+}
+
+.owl-carousel{
+	margin: 0 0 25px;
+}
+
+/*! product list */
+.product-thumb{
+	border: 1px solid #ddd;
+  margin-bottom: 20px;
+  overflow: auto;
+  background: #fff;
+
+  figure{
+  	text-align: center;
+  	a{
+  		display: block;
+  	}
+  	img{
+  		margin-left: auto;
+  		margin-right: auto;
+  	}
+  }
+
+  .caption{
+  	padding: 0 20px;
+  	min-height: 180px;
+
+  	h1,
+  	h2,
+  	h3,
+  	h4,
+  	h5{
+  		font-weight: bold;
+  	}
+  }
+
+  .button-group{
+  	border-top: 1px solid #ddd;
+	  background-color: #eee;
+	  overflow: auto;
+
+	  button{
+	  	width: 60%;
+		  border: none;
+		  display: inline-block;
+		  float: left;
+		  background-color: #eee;
+		  color: #888;
+		  line-height: 38px;
+		  font-weight: bold;
+		  text-align: center;
+		  text-transform: uppercase;
+
+		  &:hover{
+		  	color: #444;
+			  background-color: #ddd;
+			  text-decoration: none;
+			  cursor: pointer;
+		  }
+
+		  @media (max-width: @screen-lg) {
+		  	width: 33.33px;
+		  }
+
+		  @media (max-width: @screen-sm) {
+		  	width: 33.33px;
+		  }
+	  }
+	  & button + button{
+	  	width: 20%;
+  		border-left: 1px solid #ddd;
+
+  		@media (max-width: @screen-lg) {
+		  	width: 33.33px;
+		  }
+		  @media (max-width: @screen-sm) {
+		  	width: 33.33px;
+		  }
+	  }
+  }
+}
+
+footer{
+	background: #242424;
+
+	hr{
+		border-color: #373737;
+	}
+}
