@@ -16,10 +16,10 @@ use moschi\User;
 
 Route::get('/', 'HomeController@index');
 
-// Route::get('user', [
-// 	'middleware' => 'auth',
-// 	'uses' => 'ProfileController@index'
-// ]);
+Route::get('user', [
+	'middleware' => 'auth',
+	'uses' => 'ProfileController@index'
+]);
 
 Route::get('itm/{item}/{id}', function($item, $id){
 	$item = Products::where('id', $id)->first();
