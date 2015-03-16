@@ -5,6 +5,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
+use Illuminate\Support\Facades;
 class AuthController extends Controller {
 
 	/*
@@ -19,6 +20,8 @@ class AuthController extends Controller {
 	*/
 
 	use AuthenticatesAndRegistersUsers;
+
+	protected $redirectTo = '/';
 
 	/**
 	 * Create a new authentication controller instance.

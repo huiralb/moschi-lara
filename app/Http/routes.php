@@ -1,5 +1,6 @@
 <?php
 use moschi\Products;
+use moschi\User;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -11,15 +12,14 @@ use moschi\Products;
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+// Route::get('/', 'WelcomeController@index');
 
-Route::get('home', 'HomeController@index');
+Route::get('/', 'HomeController@index');
 
-Route::get('show', 'HomeController@show');
-
-Route::get('user/profile', ['as' => 'profile', function(){
-	return "Only <strong>$user->name</strong> may be entered";
-}]);
+// Route::get('user', [
+// 	'middleware' => 'auth',
+// 	'uses' => 'ProfileController@index'
+// ]);
 
 Route::get('itm/{item}/{id}', function($item, $id){
 	$item = Products::where('id', $id)->first();
@@ -30,3 +30,4 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+

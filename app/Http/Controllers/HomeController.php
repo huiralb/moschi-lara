@@ -1,5 +1,9 @@
 <?php namespace moschi\Http\Controllers;
 use Illuminate\Contracts\Auth\Guard;
+
+use moschi\Maincategories;
+use moschi\Categories;
+use moschi\Products;
 class HomeController extends Controller {
 
 	/*
@@ -30,15 +34,10 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('admin.dashboard');
-	}
-
-	public function show()
-	{
-		if (Auth::check()) {
-			return "you are login ";
-		}
-		return "not login";
+		return view('welcome')->with(array(
+			'maincategories' => Maincategories::get(),
+			'products' => Products::get()
+			));
 	}
 
 }
