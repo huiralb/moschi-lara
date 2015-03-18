@@ -51,7 +51,13 @@
 									Login
 								</button>
 
-								<a href="/password/email">Forgot Your Password?</a>
+								<a href="{{ URL::to('/password/email') }}">Forgot Your Password?</a>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-md-6 col-md-offset-4">
+								<p>New User? <a href="{{ URL::to('/auth/register') }}">Register</a></p>
 							</div>
 						</div>
 					</form>

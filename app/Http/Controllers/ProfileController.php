@@ -1,19 +1,32 @@
 <?php namespace moschi\Http\Controllers;
 
+use moschi\User;
 use moschi\Http\Requests;
 use moschi\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
+use Closure;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Http\RedirectResponse;
+use Redirect;
+use Input;
 
 class ProfileController extends Controller {
+
+	protected $auth;
+
+	public function __construct(Guard $auth){
+		$this->auth = $auth;
+	}
 
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(User $user)
 	{
+		if ( is_null($user) ) {
+			return abort(404);
+		}
 		return view('profile.index');
 	}
 
@@ -45,7 +58,7 @@ class ProfileController extends Controller {
 	 */
 	public function show($id)
 	{
-		
+		return "show $id";
 	}
 
 	/**
@@ -54,9 +67,13 @@ class ProfileController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit(User $user)
 	{
-		//
+		if ($user) {
+			return view('profile.edit', compact('user'));
+		}
+
+		return abort(404);
 	}
 
 	/**
@@ -65,9 +82,14 @@ class ProfileController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(User $user)
 	{
-		//
+		$input = array_except(Input::all(), ['_method', '_token']);
+		$user = $user->update($input);
+		if ($user) {
+			return Redirect::route('user.index');
+		}
+		return Redirect::route('user.edit')->withInput()->withErrors(User::errors());
 	}
 
 	/**
@@ -76,9 +98,13 @@ class ProfileController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy(User $user)
 	{
-		//
+		$delete = $user->delete();
+		if ($delete) {
+			return Redirect::to('/');
+		}
+		return Redirect::route('user.index')->with('message', 'Error to delete user');
 	}
 
 }
