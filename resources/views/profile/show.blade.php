@@ -30,6 +30,9 @@
 		@if(! $products->isEmpty() )
 			@foreach($products as $product)
 				<h3> {{ $product->name }} </h3>
+				@foreach($product->image() as $image)
+					<img src="{{ URL::asset('public/images/products/' . $image->name) }}" alt="{{ $image->name }}"/>
+				@endforeach
 				<p> {{ $product->description }} </p>
 			@endforeach
 		@else
