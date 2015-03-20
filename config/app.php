@@ -27,7 +27,6 @@ return [
 	*/
 
 	'url' => 'http://localhost/moschi-lara/',
-
 	/*
 	|--------------------------------------------------------------------------
 	| Application Timezone
@@ -145,8 +144,8 @@ return [
 		'moschi\Providers\ConfigServiceProvider',
 		'moschi\Providers\EventServiceProvider',
 		'moschi\Providers\RouteServiceProvider',
-      // 'Barryvdh\Debugbar\ServiceProvider',
-      // 'Intervention\Image\ImageServiceProvider',
+      'Barryvdh\Debugbar\ServiceProvider',
+      'Intervention\Image\ImageServiceProvider',
 
 
    ],
@@ -202,8 +201,8 @@ return [
 		/*
 		 * applications
 		 */
-      // 'Debugbar' => 'Barryvdh\Debugbar\Facade',
-      // 'Image' => 'Intervention\Image\Facades\Image',
+      'Debugbar' => 'Barryvdh\Debugbar\Facade',
+      'Image' => 'Intervention\Image\Facades\Image',
 
 	],
 

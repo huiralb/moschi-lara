@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - moschi-lara@localhost" uuid="b5990d0a-8990-4b96-bd6c-84b89bf2ac53">
+    <database-info product="MySQL" version="5.6.21-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="moschi-lara"/>
+    <table name="categories" schema="" catalog="moschi-lara" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="main_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="categories_main_id_foreign" columns="main_id" ref-table="maincategories" ref-schema="" ref-catalog="moschi-lara" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="products_category_id_foreign" table="products" schema="" catalog="moschi-lara" columns="category_id"/>
+      <index name="categories_main_id_foreign" unique="false" columns="main_id"/>
+    </table>
+    <table name="maincategories" schema="" catalog="moschi-lara" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="categories_main_id_foreign" table="categories" schema="" catalog="moschi-lara" columns="main_id"/>
+    </table>
+    <table name="migrations" schema="" catalog="moschi-lara" type="TABLE">
+      <column name="migration" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="batch" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+    </table>
+    <table name="password_resets" schema="" catalog="moschi-lara" type="TABLE">
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="token" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <index name="password_resets_email_index" unique="false" columns="email"/>
+      <index name="password_resets_token_index" unique="false" columns="token"/>
+    </table>
+    <table name="product_images" schema="" catalog="moschi-lara" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="product_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="primary" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA=="/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="product_images_product_id_foreign" columns="product_id" ref-table="products" ref-schema="" ref-catalog="moschi-lara" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="product_images_product_id_foreign" unique="false" columns="product_id"/>
+    </table>
+    <table name="products" schema="" catalog="moschi-lara" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="user_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="category_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="description" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="products_category_id_foreign" columns="category_id" ref-table="categories" ref-schema="" ref-catalog="moschi-lara" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="products_user_id_foreign" columns="user_id" ref-table="users" ref-schema="" ref-catalog="moschi-lara" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="product_images_product_id_foreign" table="product_images" schema="" catalog="moschi-lara" columns="product_id"/>
+      <index name="products_category_id_foreign" unique="false" columns="category_id"/>
+      <index name="products_user_id_foreign" unique="false" columns="user_id"/>
+    </table>
+    <table name="users" schema="" catalog="moschi-lara" type="TABLE">
+      <column name="id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12"/>
+      <column name="remember_token" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="updated_at" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="products_user_id_foreign" table="products" schema="" catalog="moschi-lara" columns="user_id"/>
+      <index name="users_email_unique" unique="true" columns="email"/>
+    </table>
+  </data-source>
+</component>
