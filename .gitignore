@@ -1,7 +1,12 @@
 
 /node_modules
 .htaccess
+public/.htaccess
+ftpsycn.settings
+
+### Git
 .gitignore
+git-ftp
 
 
 ### Vagrant template
