@@ -7,9 +7,9 @@
 			<li>Username:  {{ Auth::user()->name }} </li>
 			<li>Email:  {{ Auth::user()->email }} </li>
 		</ul>
-		<p><a class="btn btn-primary btn-xs" href="{{ URL::route('user.edit', ['id' => Auth::user()->id]) }}">Edit</a></p>
-
 		{!! Form::open(['method' => 'delete', 'route' => ['user.destroy', Auth::user()->id]]) !!}
+			<a class="btn btn-primary btn-xs" href="{{ URL::route('user.edit', ['id' => Auth::user()->id]) }}">Edit</a>
+
 			<button type="submit" class="btn btn-danger btn-xs">Delete</button>
 		{!! Form::close() !!}
 		@if (count($errors) > 0)
@@ -23,5 +23,18 @@
 			</div>
 		@endif
 
-	</div>
+		<hr/>
+
+		<h1>My Products</h1>
+		<a class="btn btn-xs btn-primary" href="{{ URL::to('/item/create') }}">Add Product</a>
+		@if(! $products->isEmpty() )
+			@foreach($products as $product)
+				<h3> {{ $product->name }} </h3>
+				<p> {{ $product->description }} </p>
+			@endforeach
+		@else
+			<p>No product items are loaded !!</p>
+		@endif
+
+	</div>{{-- End container --}}
 @endsection

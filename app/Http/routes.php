@@ -18,14 +18,12 @@ Route::get('/', 'HomeController@index');
 
 Route::group(['middleware' => 'auth'], function(){
 	Route::resource('user', 'ProfileController',
-		['except' => ['store', 'show', 'create']]
+		['except' => ['store', 'index', 'create']]
+	);
+	Route::resource('item', 'ProductController',
+		['except' => ['index']]
 	);
 });
-
-// Route::get('user', [
-	// 'middleware' => 'auth',
-	// 'uses' => 'ProfileController@index'
-// ]);
 
 Route::get('itm/{item}/{id}', function($item, $id){
 	$item = Products::where('id', $id)->first();
@@ -36,4 +34,16 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+Route::get('image', function(){
+//   $image = Image::make('public/images/products/iphone2.jpg')->resize(100, 100);
+//   $image->save('public/images/');
+   return Image::make('public/images/products/iphone.jpg')->mime();
+
+});
+
+Route::get('str', function () {
+   return str_random(10);
+});
+
 

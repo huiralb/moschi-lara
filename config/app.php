@@ -145,8 +145,11 @@ return [
 		'moschi\Providers\ConfigServiceProvider',
 		'moschi\Providers\EventServiceProvider',
 		'moschi\Providers\RouteServiceProvider',
+      // 'Barryvdh\Debugbar\ServiceProvider',
+      // 'Intervention\Image\ImageServiceProvider',
 
-	],
+
+   ],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -195,6 +198,12 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+
+		/*
+		 * applications
+		 */
+      // 'Debugbar' => 'Barryvdh\Debugbar\Facade',
+      // 'Image' => 'Intervention\Image\Facades\Image',
 
 	],
 

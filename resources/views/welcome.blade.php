@@ -64,6 +64,7 @@
         --></script>
       </div>
 
+
       <div class="col-sm-12" id="products">
         <h1>Features</h1>
 
@@ -71,17 +72,20 @@
           @foreach( $products as $product )
           <div class="col-sm-4 col-md-3">
             <div class="product-thumb">
-              <figure>
-                <a href="{{ URL::to('itm/'.str_slug($product->name, '-').'/'.$product->id) }}">
-                  <img src="{{ URL::asset('public').'/'.$product->image }}" alt="{{ $product->name }}">
-                </a>
-              </figure>
+              @foreach($product->image() as $image)
+                <figure>
+                   <a href="{{ URL::to('itm/'.str_slug($product->name, '-').'/'.$product->id) }}">
+                    <img src="{{ URL::asset('public').'/images/products/'.$image->name }}" alt="{{ $product->name }}">
+                   </a>
+                 </figure>
+              @endforeach
               <div class="caption">
                 <h4><a href="{{ URL::to('itm/'.$product->name.'/'.$product->id) }}">{{ $product->name }}</a></h4>
                 <p>
                   {{ str_limit($product->description) }}
                 </p>
                 <p class="price">
+
                 </p>
 
               </div>
@@ -94,6 +98,7 @@
           </div>
           @endforeach
         @endif
+
       </div>
 
     </div><!-- End row -->

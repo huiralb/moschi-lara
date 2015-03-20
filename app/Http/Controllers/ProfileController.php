@@ -1,6 +1,7 @@
 <?php namespace moschi\Http\Controllers;
 
 use moschi\User;
+use moschi\Products;
 use moschi\Http\Requests;
 use moschi\Http\Controllers\Controller;
 use Closure;
@@ -8,13 +9,16 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\RedirectResponse;
 use Redirect;
 use Input;
+use Auth;
 
 class ProfileController extends Controller {
 
 	protected $auth;
 
 	public function __construct(Guard $auth){
+		$this->middleware('auth');
 		$this->auth = $auth;
+		$this->id = Auth::user()->id;
 	}
 
 	/**
@@ -22,12 +26,9 @@ class ProfileController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index(User $user)
+	public function index()
 	{
-		if ( is_null($user) ) {
-			return abort(404);
-		}
-		return view('profile.index');
+		//
 	}
 
 	/**
@@ -56,9 +57,16 @@ class ProfileController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show(User $user)
 	{
-		return "show $id";
+		if ($user) {
+			$products = Products::where('user_id', $this->id)->latest()->get();
+			return view('profile.show', compact('products'));
+		}
+		else{
+			abort(404);
+		}
+
 	}
 
 	/**
@@ -69,11 +77,7 @@ class ProfileController extends Controller {
 	 */
 	public function edit(User $user)
 	{
-		if ($user) {
-			return view('profile.edit', compact('user'));
-		}
-
-		return abort(404);
+		return view('profile.edit', compact('user'));
 	}
 
 	/**
@@ -104,7 +108,7 @@ class ProfileController extends Controller {
 		if ($delete) {
 			return Redirect::to('/');
 		}
-		return Redirect::route('user.index')->with('message', 'Error to delete user');
+		return Redirect::route('user.index')->withErrors(User::errors());
 	}
 
 }
