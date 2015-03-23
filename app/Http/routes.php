@@ -27,8 +27,11 @@ Route::group(['middleware' => 'auth'], function(){
 
 Route::get('itm/{item}/{id}', function($item, $id){
 	$item = Products::where('id', $id)->first();
-	return view('item.detail')->with('item', $item);
+	return view('item.detail', compact('item'));
 });
+
+// Category
+Route::get('{name}_c{id}/', 'CateController@show');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

@@ -4,30 +4,47 @@
 <div id="teras">
   <div class="container">
     <div class="row">
-      <div class="col-sm-4 categories">
-        <div class="list-group text-capitalize">
-          <li class="list-group-item active" style="position:relative">Categories</li>
-          @foreach($maincategories as $main)
-          <a tab-index="-1" class="list-group-item" href="{{ $main->id }}">{{ $main->name }}
-            @if( $main->categories() )
-              <ul class="dropdown list-group text-primary">
-                @foreach($main->categories() as $categories)
-                <li class="list-group-item">{{ $categories->name }}</li>
-                @endforeach
-              </ul>
-            @endif
-          </a>
-          @endforeach
+      <div class="col-sm-4">
+        <div class="category text-capitalize">
+          <div class="category-header">
+            Categories
+          </div>
+
+          <ul class="category-list nav nav-stacked">
+            @foreach($maincategories as $main)
+              <li class="category-list-item">
+                  @if($main->categories() )
+                  <a href="#">{{ $main->name }}</a>
+                  <div class="sc-cat">
+                    <ul class="nav">
+                      @foreach($main->categories() as $category)
+                        <li class="sc-cat-list">
+                          <a href="{{ URL::to('/' . $category->url . '_c' . $category->id) }}">
+                            {{ $category->name }}
+                          </a>
+                        </li>
+                      @endforeach
+                    </ul>
+                    @endif
+                  </div>
+              </li>
+            @endforeach
+          </ul>
         </div>
+
       </div>
       <div class="col-sm-8">
         <div id="home-slideshow-1" class="owl-carousel owl-theme">
           <div class="item">
-            <img src="{{ URL::to('public/images/iPhone6-1140x380.jpg') }}" alt="iPhone 6" class="img-responsive">
+            <a href="#">
+              <img src="{{ URL::to('public/images/MacBookAir-1140x380.jpg') }}" alt="MacBookAir" class="img-responsive">
+            </a>
           </div>
 
           <div class="item">
-            <img src="{{ URL::to('public/images/MacBookAir-1140x380.jpg') }}" alt="MacBookAir" class="img-responsive">
+            <a href="#">
+              <img src="{{ URL::to('public/images/iPhone6-1140x380.jpg') }}" alt="iPhone 6" class="img-responsive">
+            </a>
           </div>
         </div>
         <div id="home-slideshow-2" class="owl-carousel owl-theme" style="height:218px;">

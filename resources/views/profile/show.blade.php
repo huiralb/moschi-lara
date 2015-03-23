@@ -26,15 +26,24 @@
 		<hr/>
 
 		<h1>My Products</h1>
-		<a class="btn btn-xs btn-primary" href="{{ URL::to('/item/create') }}">Add Product</a>
+		<p><a class="btn btn-xs btn-primary" href="{{ URL::to('/item/create') }}">Add Product</a></p>
 		@if(! $products->isEmpty() )
+			<div class="row">
+				
 			@foreach($products as $product)
-				<h3> {{ $product->name }} </h3>
-				@foreach($product->image() as $image)
-					<img src="{{ URL::asset('public/images/products/' . $image->name) }}" alt="{{ $image->name }}"/>
-				@endforeach
-				<p> {{ $product->description }} </p>
+				<div class="col-sm-12 media" style="margin-bottom:1em">
+					@foreach($product->image() as $image)
+					<a class="media-left" href="#">
+						<img class="media-object" src="{{ URL::asset('public/images/products/' . $image->name) }}" alt="{{ $image->name }}">
+					</a>
+					@endforeach
+					<div class="media-body">
+						<h4 class="media-heading">{{ $product->name }}</h4>
+						<p>{{ $product->description }}</p>
+					</div>
+				</div>
 			@endforeach
+			</div>
 		@else
 			<p>No product items are loaded !!</p>
 		@endif

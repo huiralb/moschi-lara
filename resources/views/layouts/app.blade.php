@@ -8,7 +8,7 @@
 
 	{!! HTML::style('/public/css/owl.carousel.css') !!}
 	{!! HTML::style('/public/css/font-awesome.min.css') !!}
-	{!! HTML::style('/public/css/app.css?v='.rand(1000,9999)) !!}
+	{!! HTML::style('/public/css/app.css') !!}
 	{!! HTML::style('/public/css/fonts.css') !!}
 	{{-- Fonts --}}
 	{!! HTML::style('//fonts.googleapis.com/css?family=Roboto:400,300') !!}
@@ -80,49 +80,79 @@
 		@yield('content')
 	</article>
 
-	<footer>
-	  <div class="container">
-	    <div class="row">
-	      <div class="col-sm-3">
-	        <h5>Information</h5>
-	        <ul class="list-unstyled">
-	            <li><a href="http://madeoutsidechina.com/moschi/#">About Us</a></li>
-	            <li><a href="http://madeoutsidechina.com/moschi/#">Delivery Information</a></li>
-	            <li><a href="http://madeoutsidechina.com/moschi/#">Privacy Policy</a></li>
-	            <li><a href="http://madeoutsidechina.com/moschi/#">Terms &amp; Conditions</a></li>
-	          </ul>
-	      </div>
-	      <div class="col-sm-3">
-	        <h5>Customer Service</h5>
-	        <ul class="list-unstyled">
-	          <li><a href="http://madeoutsidechina.com/moschi/#">Contact Us</a></li>
-	          <li><a href="http://madeoutsidechina.com/moschi/#">Returns</a></li>
-	          <li><a href="http://madeoutsidechina.com/moschi/#">Site Map</a></li>
-	        </ul>
-	      </div>
-	      <div class="col-sm-3">
-	        <h5>Extras</h5>
-	        <ul class="list-unstyled">
-	          <li><a href="http://madeoutsidechina.com/moschi/#">Brands</a></li>
-	          <li><a href="http://madeoutsidechina.com/moschi/#">Gift Vouchers</a></li>
-	          <li><a href="http://madeoutsidechina.com/moschi/#">Affiliates</a></li>
-	          <li><a href="http://madeoutsidechina.com/moschi/#">Specials</a></li>
-	        </ul>
-	      </div>
-	      <div class="col-sm-3">
-	        <h5>My Account</h5>
-	        <ul class="list-unstyled">
-	          <li><a href="http://madeoutsidechina.com/moschi/#">My Account</a></li>
-	          <li><a href="http://madeoutsidechina.com/moschi/#">Order History</a></li>
-	          <li><a href="http://madeoutsidechina.com/moschi/#">Wish List</a></li>
-	          <li><a href="http://madeoutsidechina.com/moschi/#">Newsletter</a></li>
-	        </ul>
-	      </div>
-	    </div>
-	    <hr />
-	    <p>Madeoutsidechina © 2015</p> 
-	  </div>
+	<!-- FOOTER -->
+	<footer id="footer">
+		<div class="container">
+			<div class="col-md-12 footer-widget">
+				<div class="row">
+
+					<div class="col-md-3" id="alert">
+						<h3>Moschi Alert</h3>
+						<hr>
+						<p>
+							Get Update new product by entering your Email here
+						</p>
+
+						form Alert email newsletter
+						<input type="email" class="form-control" placeholder="name@domain.com"/>
+						<button class="btn btn-block btn-alert">Subscribe</button>
+					</div>
+					<!-- /.alert -->
+
+					<div class="col-md-3 service">
+						<h3>Services &amp; Tools</h3>
+						<hr>
+						<ul>
+							<li><a href="#">My Account</a></li>
+							<li><a href="#">Trade Manager</a></li>
+							<li><a href="#">Mochi Learning Center</a></li>
+						</ul>
+					</div>
+
+					<div class="col-md-3 how-to-buy">
+						<h3>How to buy</h3>
+						<hr>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, quis.</p>
+					</div>
+
+					<div class="col-md-3 about">
+						<h3>About Moschi</h3>
+						<hr>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque quam, asperiores at
+							ducimus explicabo. Fuga sapiente, cumque doloremque quae animi!
+						</p>
+
+						<div class="socmed">
+							<h4>Connect with Madeoutsidechina</h4>
+							<ul>
+								<li><a href="#"><img class="img-responsive" src="{{ URL::asset('public/images/socmed/facebook.jpg') }}" alt="facebook"></a>
+								</li>
+								<li><a href="#"><img class="img-responsive" src="{{ URL::asset('public/images/socmed/twitter.jpg') }}"
+													 alt="twitter"></a></li>
+								<li><a href="#"><img class="img-responsive" src="{{ URL::asset('public/images/socmed/linkedin.jpg') }}" alt="linkedin"></a>
+								</li>
+								<li><a href="#"><img class="img-responsive" src="{{ URL::asset('public/images/socmed/googleplus.jpg') }}"
+													 alt="googleplus"></a></li>
+								<li><a href="#"><img class="img-responsive" src="{{ URL::asset('public/images/socmed/youtube.jpg') }}"
+													 alt="youtube"></a></li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<!-- end footer-widget -->
+
+			<div class="col-md-12 copyright text-center">
+				<hr/>
+				<h6>Copyright</h6>
+			</div>
+
+		</div>{{-- End container --}}
 	</footer>
+
+	<!-- FOOTER -->
 
 </body>
 </html>

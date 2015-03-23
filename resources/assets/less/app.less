@@ -3,11 +3,15 @@
 
 @btn-font-weight: 400;
 @font-family-sans-serif: "Roboto", Helvetica, Arial, sans-serif;
+//button background color
+@moschi-blue: #06c;
+@moschi-blue-hover: darken(@moschi-blue, 3%);
+
 body{
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400;
 	font-size: 12px;
-	color: #666;
+	color: @gray-dark;
 	line-height: 20px;
 
 	// set padding-top if the header fixed top
@@ -53,26 +57,29 @@ body{
 
 }
 
-.categories{
-	.dropmenu{
+.category{
+  .category-header{
+	padding: 15px;
+	background: #ddd;
+	font-size: 20px;
+  }
+  .category-list{
+	.category-list-item{
+	  .sc-cat {
+		visibility: hidden;
+		position: absolute;
+		left: 100%;
+		top: 0;
+		width: 100%;
+		background: #FFFAFA;
+		z-index: 2;
+	  }
+	  
+	  &:hover .sc-cat{
+		visibility: visible;
+	  }
 	}
-	.list-group-item{
-		position: relative;
-
-		& > .dropdown{
-			position: absolute;
-			left: 100%;
-			top: 0;
-			z-index: 1;
-			width: 300px;
-			visibility: hidden;
-			background-color: #fff;
-		}
-
-		&:hover > .dropdown{
-			visibility: visible;
-		}
-	}
+  }
 }
 
 .owl-carousel{
@@ -156,10 +163,54 @@ body{
   }
 }
 
-footer{
-	background: #242424;
+// Footer
+// --------------------------------------------------
+#footer {
+  background: #d7d7d7;
+  hr {
+	margin-top: 10px;
+	.box-shadow(0 -1px 0 #bcbcbc);
+  }
+  .footer-widget {
 
-	hr{
-		border-color: #373737;
+	ul {
+	  margin-bottom: 0;
+	  padding-left: 0; // Override default ul/ol
+	  list-style: none;
+	  .clearfix();
 	}
+	#alert {
+	  input {
+		height: 35px;
+	  }
+	  .btn-alert {
+		background: @moschi-blue;
+		color: #fff;
+		font-size: 14px;
+		letter-spacing: 0.3px;
+		.size(75%, 40px);
+		margin: 10px 0;
+
+		&:hover {
+		  background: @moschi-blue-hover;
+		}
+	  }
+	}
+	.about {
+	  .socmed {
+		ul li {
+		  float: left;
+		  &:hover {
+			.opacity(0.8);
+		  }
+		  img {
+			.size(50px, 50px);
+		  }
+		}
+	  }
+	}
+  }
+  .copyright {
+	padding: 1em 20px;
+  }
 }

@@ -1,6 +1,8 @@
 
 /node_modules
 .htaccess
+
+app/config/
 public/.htaccess
 ftpsycn.settings
 
