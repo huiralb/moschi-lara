@@ -92,7 +92,7 @@
               @foreach($product->image() as $image)
                 <figure>
                    <a href="{{ URL::to('itm/'.str_slug($product->name, '-').'/'.$product->id) }}">
-                    <img src="{{ URL::asset('public').'/images/products/'.$image->name }}" alt="{{ $product->name }}">
+                    <img src="{{ URL::asset('public').'/images/products/m/'.$image->name }}" alt="{{ $product->name }}">
                    </a>
                  </figure>
               @endforeach

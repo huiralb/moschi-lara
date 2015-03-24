@@ -41,9 +41,6 @@
 				</div>
 
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li><a href="{{ URL::to('/') }}">Home</a></li>
-					</ul>
 					<form id="search" class="navbar-form navbar-left navbar-input-group" role="search">
             <div class="form-group">
               <input type="text" class="form-control" name="search" value="" placeholder="Search">
@@ -65,7 +62,7 @@
 							<li class="dropdown text-capitalize">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
 								<ul class="dropdown-menu" role="menu">
-									<li><a href="{{ URL::to('/user', [Auth::user()->id]) }}">Profile</a></li>
+									<li><a href="{{ URL::to('/user') }}">Profile</a></li>
 									<li><a href="{{ URL::to('/auth/logout') }}">Logout</a></li>
 								</ul>
 							</li>
@@ -76,7 +73,7 @@
 		</nav>
 	</header>
 	
-	<article style="min-height:370px">
+	<article style="min-height:250px;">
 		@yield('content')
 	</article>
 
@@ -87,7 +84,7 @@
 				<div class="row">
 
 					<div class="col-md-3" id="alert">
-						<h3>Moschi Alert</h3>
+						<h4>Moschi Alert</h4>
 						<hr>
 						<p>
 							Get Update new product by entering your Email here
@@ -100,7 +97,7 @@
 					<!-- /.alert -->
 
 					<div class="col-md-3 service">
-						<h3>Services &amp; Tools</h3>
+						<h4>Services &amp; Tools</h4>
 						<hr>
 						<ul>
 							<li><a href="#">My Account</a></li>
@@ -110,13 +107,13 @@
 					</div>
 
 					<div class="col-md-3 how-to-buy">
-						<h3>How to buy</h3>
+						<h4>How to buy</h4>
 						<hr>
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, quis.</p>
 					</div>
 
 					<div class="col-md-3 about">
-						<h3>About Moschi</h3>
+						<h4>About Moschi</h4>
 						<hr>
 						<p>
 							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque quam, asperiores at
@@ -124,7 +121,7 @@
 						</p>
 
 						<div class="socmed">
-							<h4>Connect with Madeoutsidechina</h4>
+							<h5>Connect with Madeoutsidechina</h5>
 							<ul>
 								<li><a href="#"><img class="img-responsive" src="{{ URL::asset('public/images/socmed/facebook.jpg') }}" alt="facebook"></a>
 								</li>

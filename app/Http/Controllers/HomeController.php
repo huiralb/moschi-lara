@@ -25,8 +25,8 @@ class HomeController extends Controller {
 	public function index()
 	{
       $maincategories = Maincategories::get();
-      $products = Products::take(4)->get();
-      return view('welcome', compact('maincategories', 'products'));
+		$products = Products::take(4)->get();
+		return view('welcome', compact('maincategories', 'products'));
 	}
 
 }

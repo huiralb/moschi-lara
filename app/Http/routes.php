@@ -18,7 +18,7 @@ Route::get('/', 'HomeController@index');
 
 Route::group(['middleware' => 'auth'], function(){
 	Route::resource('user', 'ProfileController',
-		['except' => ['store', 'index', 'create']]
+		['except' => ['store', 'show', 'create']]
 	);
 	Route::resource('item', 'ProductController',
 		['except' => ['index']]

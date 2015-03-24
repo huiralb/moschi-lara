@@ -6,11 +6,13 @@ use moschi\ProductImage;
 use Request;
 // own
 use moschi\Products;
+use moschi\Categories;
 use Auth;
 use Input;
 use Validator;
 use Session;
 use Image;
+use Redirect;
 class ProductController extends Controller {
 
 
@@ -26,7 +28,7 @@ class ProductController extends Controller {
 	 */
 	public function index()
 	{
-			return dd(Products::all());
+			return "show all product";
 	}
 
 	/**
@@ -37,23 +39,36 @@ class ProductController extends Controller {
 	public function create()
 	{
 		$user = Auth::user()->id;
-		return view('item.create', compact('user'));
+      $categories = Categories::orderBy('name')->get();
+
+      return view('item.create', compact('user', 'categories'));
 	}
 
-	/**
-	 * Store a newly created resource in storage.
+   /**
+	 * Display the specified resource.
 	 *
+	 * @param  int  $id
 	 * @return Response
 	 */
-	public function store()
+	public function show($id)
 	{
-		$input = Input::all();
-		$files = Input::file('images');
+		//
+	}
+
+   /**
+    * Store a newly created resource in storage.
+    *
+    * @return Response
+    */
+   public function store()
+   {
+      $input = Input::all();
+      $files = Input::file('images');
 
       $data = new Products;
       $data->name = $input['name'];
       $data->user_id = $input['user_id'];
-      $data->category_id = 1;
+      $data->category_id = $input['category_id'];
       $data->description = $input['description'];
       $data->save();
 
@@ -64,7 +79,8 @@ class ProductController extends Controller {
          $ext = $this->getExtension($file);
          $file_name = $this->filename(Input::get('name')) . $ext;
          Image::make($file)->save('public/images/products/' . $file_name);
-         Image::make($file)->resize(100, 100)->save('public/images/products/m/' . $file_name);
+         Image::make($file)->resize(350, 263)->save('public/images/products/m/' . $file_name);
+         Image::make($file)->resize(155, 116)->save('public/images/products/s/' . $file_name);
 
          // insert data image to table
          $image = new ProductImage;
@@ -82,22 +98,11 @@ class ProductController extends Controller {
 
 
 //		Products::create($input);
-		return redirect('user/'.Auth::user()->id);
+      return redirect('/user');
 
-	}
+   }
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
+   /**
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param  int  $id
@@ -105,7 +110,9 @@ class ProductController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+	   $product = Products::find($id);
+	   $categories = Categories::select('id', 'name')->orderBy('name')->get();
+      return view('item.edit', compact('product', 'categories'));
 	}
 
 	/**
@@ -116,7 +123,17 @@ class ProductController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+      $product = Products::findOrFail($id);
+
+      $validator = Validator::make($data = Input::all(), Products::$rules);
+
+      if ($validator->fails()) {
+         return Redirect::back()->withErrors($validator)->withInput();
+      }
+
+      $product->update($data);
+
+      return Redirect::to('/user');
 	}
 
 	/**
@@ -127,7 +144,11 @@ class ProductController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+      $delete = Products::find($id)->delete();
+      if ($delete) {
+
+         return Redirect::to('/user');
+      }
 	}
 
    /*

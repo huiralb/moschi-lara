@@ -19,12 +19,24 @@
 				{!! Form::open(['url'=>'item', 'class'=>'form-horizontal', 'role'=>'form', 'files'=>true]) !!}
 
 					{!! Form::hidden('user_id', Auth::user()->id) !!}
-					{!! Form::hidden('category_id', 1) !!}
 
 					<div class="form-group">
 						{!! Form::label('name','Name:', ['class'=>'col-sm-4']) !!}
 						<div class="col-sm-8">
 							{!! Form::text('name', null, ['class'=>'form-control']) !!}
+						</div>
+					</div>
+
+
+					<div class="form-group">
+						{!! Form::label('category','Category:', ['class'=>'col-sm-4']) !!}
+						<div class="col-sm-8">
+							<select class="form-control text-capitalize" name="category_id" required>
+								<option value="">-- Select --</option>
+								@foreach($categories as $category)
+									<option value="{{ $category->id }}">{{ $category->name }}</option>
+								@endforeach
+							</select>
 						</div>
 					</div>
 
@@ -36,18 +48,19 @@
 					</div>
 
 
-						<div class="form-group">
-							{!! Form::label('image','Images:', ['class'=>'col-sm-4']) !!}
-							<div class="col-sm-8">
-								{!! Form::input('file', 'images[]', null, ['multiple'=>true,'class'=>'form-control', 'accept'=>'image/*']) !!}
-							</div>
+					<div class="form-group">
+						{!! Form::label('image','Images:', ['class'=>'col-sm-4']) !!}
+						<div class="col-sm-8">
+							{!! Form::input('file', 'images[]', null, ['multiple'=>true,'class'=>'form-control',
+							'accept'=>'image/*']) !!}
 						</div>
-
+					</div>
 
 
 					<div class="form-group">
 						{!! Form::submit('Submit', ['class'=>'btn btn-primary']) !!}
 					</div>
+
 				{!! Form::close() !!}
 			</div>
 		</div>

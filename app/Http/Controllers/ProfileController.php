@@ -28,7 +28,8 @@ class ProfileController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		$products = Products::where('user_id', $this->id)->latest()->get();
+		return view('profile.index', compact('products'));
 	}
 
 	/**
@@ -59,14 +60,7 @@ class ProfileController extends Controller {
 	 */
 	public function show(User $user)
 	{
-		if ($user) {
-			$products = Products::where('user_id', $this->id)->latest()->get();
-			return view('profile.show', compact('products'));
-		}
-		else{
-			abort(404);
-		}
-
+		//
 	}
 
 	/**
