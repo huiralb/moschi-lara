@@ -144,11 +144,13 @@ class ProductController extends Controller {
 	 */
 	public function destroy($id)
 	{
-      $delete = Products::find($id)->delete();
-      if ($delete) {
-
+	   // Delete the product record.
+	   // under table relationship, this delete product_images too
+	   $product = new Products;
+      if ( $product->onDelete($id) ) {
          return Redirect::to('/user');
       }
+
 	}
 
    /*

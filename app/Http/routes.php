@@ -45,8 +45,10 @@ Route::get('image', function(){
 
 });
 
-Route::get('str', function () {
-   return str_random(10);
+get('file', function () {
+	$file = func_get_args();
+	dd($file);
 });
+
 
 
