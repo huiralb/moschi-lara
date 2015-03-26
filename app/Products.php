@@ -28,6 +28,11 @@ class Products extends Model {
                            ->get();
    }
 
+	public function images()
+	{
+		return ProductImage::where('product_id', $this->id)->get();
+	}
+
 	/*
 	 * Delete product selected record from database
 	 *

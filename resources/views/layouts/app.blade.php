@@ -73,7 +73,7 @@
 		</nav>
 	</header>
 	
-	<article style="min-height:250px;">
+	<article id="article">
 		@yield('content')
 	</article>
 

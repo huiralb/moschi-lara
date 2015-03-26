@@ -31,11 +31,17 @@
 				
 			@foreach($products as $product)
 				<div class="col-sm-12 media" style="margin-bottom:1em">
-					@foreach($product->image() as $image)
-					<a class="media-left" href="#">
-						<img class="media-object" src="{{ URL::asset('public/images/products/m/' . $image->name) }}" alt="{{ $image->name }}">
-					</a>
-					@endforeach
+					@if(!$product->image()->isEmpty())
+						@foreach($product->image() as $image)
+						<a class="media-left" href="#">
+							<img class="media-object" src="{{ URL::asset('public/images/products/m/' . $image->name) }}" alt="{{ $image->name }}">
+						</a>
+						@endforeach
+					@else
+						<a class="media-left" href="{!! URL::to('item', $product->id) !!}/edit#upload-image">
+							<img class="media-object" src="{!! URL::to('public/images/add-image.png') !!}" title="Add Image"/>
+						</a>
+					@endif
 					<div class="media-body">
 						<h4 class="media-heading">{{ $product->name }}</h4>
 						<p>{{ $product->description }}</p>

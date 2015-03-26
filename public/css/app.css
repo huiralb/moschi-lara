@@ -6282,6 +6282,15 @@ body {
 .category .category-list .category-list-item:hover .sc-cat {
   visibility: visible;
 }
+article#article {
+  min-height: 250px;
+}
+article#article .col-target {
+  padding-top: 70px;
+}
+article#article .above-col-target {
+  margin-bottom: -70px;
+}
 .owl-carousel {
   margin: 0 0 25px;
 }
@@ -6362,6 +6371,7 @@ body {
 }
 #footer {
   background: #d7d7d7;
+  padding-top: 10px;
 }
 #footer hr {
   margin-top: 10px;

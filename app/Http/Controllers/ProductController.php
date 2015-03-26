@@ -60,45 +60,52 @@ class ProductController extends Controller {
     *
     * @return Response
     */
-   public function store()
+   public function store(Request $request)
    {
-      $input = Input::all();
-      $files = Input::file('images');
+      $input = Request::all();
 
-      $data = new Products;
-      $data->name = $input['name'];
-      $data->user_id = $input['user_id'];
-      $data->category_id = $input['category_id'];
-      $data->description = $input['description'];
-      $data->save();
+      $isImageOnly = $this->isOnlyImage($input['imageOnly']);
 
-      $product_id = $data->id;
+      if (!$isImageOnly) { // Reguler Store data
 
+         $data = new Products;
+         $data->name = $input['name'];
+         $data->user_id = $input['user_id'];
+         $data->category_id = $input['category_id'];
+         $data->description = $input['description'];
+         $data->save();
+         $id = $data->id;
+         $primary = 1;
+         $redirect = redirect('/user');
+      }
+      else{ // Upload Image Only
+         $id = $input['product_id'];
+         $primary = 0;
+         $redirect = redirect()->back();
+      }
+
+      $files = Request::file('images');
       $count = 1;
       foreach ($files as $file) {
          $ext = $this->getExtension($file);
-         $file_name = $this->filename(Input::get('name')) . $ext;
+         $file_name = $this->filename($id) . $ext;
          Image::make($file)->save('public/images/products/' . $file_name);
          Image::make($file)->resize(350, 263)->save('public/images/products/m/' . $file_name);
          Image::make($file)->resize(155, 116)->save('public/images/products/s/' . $file_name);
 
-         // insert data image to table
+         // Record data to ProductImage table
          $image = new ProductImage;
          $image->name = $file_name;
-         $image->product_id = $product_id;
+         $image->product_id = $id;
          if ($count == 1) {
-            $image->primary = 1;
+            $image->primary = $primary;
          }
          $image->save();
 
          $count = $count + 1;
       }
-      // insert data to table
-//      Products::create($input);
 
-
-//		Products::create($input);
-      return redirect('/user');
+      return $redirect;
 
    }
 
@@ -111,7 +118,9 @@ class ProductController extends Controller {
 	public function edit($id)
 	{
 	   $product = Products::find($id);
+
 	   $categories = Categories::select('id', 'name')->orderBy('name')->get();
+
       return view('item.edit', compact('product', 'categories'));
 	}
 
@@ -121,11 +130,11 @@ class ProductController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(Request $request, $id)
 	{
       $product = Products::findOrFail($id);
 
-      $validator = Validator::make($data = Input::all(), Products::$rules);
+      $validator = Validator::make($data = Request::all(), Products::$rules);
 
       if ($validator->fails()) {
          return Redirect::back()->withErrors($validator)->withInput();
@@ -134,7 +143,10 @@ class ProductController extends Controller {
       $product->update($data);
 
       return Redirect::to('/user');
-	}
+
+      $files = Request::file('images');
+
+   }
 
 	/**
 	 * Remove the specified resource from storage.
@@ -146,9 +158,13 @@ class ProductController extends Controller {
 	{
 	   // Delete the product record.
 	   // under table relationship, this delete product_images too
+
 	   $product = new Products;
+
       if ( $product->onDelete($id) ) {
+
          return Redirect::to('/user');
+
       }
 
 	}
@@ -162,8 +178,11 @@ class ProductController extends Controller {
    protected function filename($request)
    {
       if (empty($request)) {
+
          return false;
+
       }
+
       return str_slug($request) . '-' . date('Ymd') . str_random(10);
    }
 
@@ -181,4 +200,16 @@ class ProductController extends Controller {
       }
       return '.' . str_replace('image/', '', $mime);
    }
+
+   protected function isOnlyImage($request)
+   {
+      if ($request == 1){
+         return true;
+      }
+
+      return false;
+   }
+
+
+
 }

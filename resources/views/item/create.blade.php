@@ -19,8 +19,10 @@
 				{!! Form::open(['url'=>'item', 'class'=>'form-horizontal', 'role'=>'form', 'files'=>true]) !!}
 
 					{!! Form::hidden('user_id', Auth::user()->id) !!}
+					{!! Form::hidden('imageOnly', 0) !!}
 
-					<div class="form-group">
+
+				<div class="form-group">
 						{!! Form::label('name','Name:', ['class'=>'col-sm-4']) !!}
 						<div class="col-sm-8">
 							{!! Form::text('name', null, ['class'=>'form-control']) !!}

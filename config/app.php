@@ -26,7 +26,7 @@ return [
 	|
 	*/
 
-	'url' => 'http://localhost/moschi-lara/',
+	'url' => 'http://localhost/moschi/',
 	/*
 	|--------------------------------------------------------------------------
 	| Application Timezone
