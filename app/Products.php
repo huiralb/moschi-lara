@@ -30,7 +30,7 @@ class Products extends Model {
 
 	public function images()
 	{
-		return ProductImage::where('product_id', $this->id)->get();
+		return ProductImage::where('product_id', $this->id)->orderBy('primary', 'DESC')->get();
 	}
 
 	/*

@@ -80,8 +80,9 @@ class ProductController extends Controller {
       }
       else{ // Upload Image Only
          $id = $input['product_id'];
-         $primary = 0;
          $redirect = redirect()->back();
+         $primary = ProductImage::ofPrimary($id)->select('primary')->first();
+         $primary = ( is_null($primary) ) ? 1 : 0;
       }
 
       $files = Request::file('images');
@@ -208,6 +209,17 @@ class ProductController extends Controller {
       }
 
       return false;
+   }
+
+   public function test()
+   {
+      $data = \moschi\ProductImage::ofPrimary(37, 1)->select('name')->first();
+      if (is_null($data)) {
+         return "data is empty";
+      }
+      else{
+         return $data;
+      }
    }
 
 

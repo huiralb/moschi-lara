@@ -88,9 +88,20 @@
                             </a>
                             <div class="media-body">
                                 <p>Created On: <strong>{!! $image->created_at !!}</strong></p>
-                                {!! Form::open(['method'=>'delete','action'=> ['ProductImageController@destroy', $image->id], 'class'=> 'form-horizontal', 'role'=>'form']) !!}
+                                @if($image->primary == 1)
+                                    <button class="btn btn-success btn-xs" disabled="1">Primary</button>
+                                    <span>The main image has been set at <strong>{!! $image->updated_at !!}</strong></span>
+                                @else
+                                    {!! Form::open(['method'=>'put','action'=> ['ProductImageController@setPrimary', $image->id], 'class'=> 'form-horizontal', 'role'=>'form']) !!}
+                                    <input type="hidden" name="product-id" value="{!! $product->id !!}"/>
+                                    <button type="submit" class="btn btn-primary btn-xs">Set Primary</button>
+                                    {!! Form::close() !!}
+                                @endif
 
-                                {!! Form::submit('Delete', ['class'=>'btn btn-sm btn-danger']) !!}
+                                {!! Form::open(['method'=>'delete','action'=> ['ProductImageController@destroy', $image->id], 'class'=> 'form-horizontal', 'role'=>'form']) !!}
+                                <input type="hidden" name="product-id" value="{!! $product->id !!}" />
+
+                                {!! Form::submit('Delete', ['class'=>'btn btn-sm btn-danger btn-xs']) !!}
                                 {!! Form::close() !!}
                             </div>
                         </div>

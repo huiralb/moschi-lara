@@ -23,7 +23,9 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::resource('item', 'ProductController',
 		['except' => ['index']]
 	);
+	// Hadling Product image
 	Route::delete('item/image/{id}', 'ProductImageController@destroy');
+	Route::put('item/image/{id}', 'ProductImageController@setPrimary');
 });
 
 Route::get('itm/{item}/{id}', function($item, $id){
@@ -40,5 +42,9 @@ Route::controllers([
 ]);
 
 
+/*
+ * Testing
+ */
+Route::get('test', 'ProductController@test');
 
 
